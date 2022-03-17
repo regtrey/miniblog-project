@@ -3,7 +3,7 @@ import classes from './Header.module.css';
 import { NavLink } from 'react-router-dom';
 
 const Header = () => {
-  const [homeActive, setHomeActive] = useState(false);
+  const [homeActive, setHomeActive] = useState(true);
   const [blogsActive, setBlogsActive] = useState(false);
 
   const homeHandler = () => {
