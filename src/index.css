@@ -3,6 +3,19 @@
   padding: 0;
 }
 
+:root {
+  --bg-primary: rgb(238, 108, 77);
+  --bg-secondary: rgb(238, 124, 95);
+  --bg-tertiary: rgb(240, 148, 125);
+  --bg-accent1: rgb(249, 65, 68);
+  --bg-accent2: rgb(249, 199, 79);
+  --bg-success: rgb(0, 178, 0);
+  --bg-fail: rgb(223, 12, 1);
+  --border-primary: rgb(218, 218, 218);
+  --text-primary: rgb(128, 128, 128);
+  --text-secondary: rgb(255, 255, 255);
+}
+
 html {
   box-sizing: border-box;
 }

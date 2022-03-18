@@ -2,14 +2,14 @@
   height: 4rem;
   display: flex;
   align-items: center;
-  border-bottom: 1px solid rgb(218, 218, 218);
+  border-bottom: 1px solid var(--border-primary);
 }
 
 .logo {
-  font-size: 2rem;
-  font-weight: 500;
-  color: rgb(238, 108, 77);
-  letter-spacing: -2px;
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: var(--bg-primary);
+  letter-spacing: -3px;
   margin: 0 auto 0 5rem;
   cursor: pointer;
   text-decoration: none;
@@ -23,17 +23,17 @@ ul {
 
 ul li a {
   font-size: 1.25rem;
-  color: rgb(146, 145, 145);
+  color: var(--text-primary);
   text-decoration: none;
   margin-right: 2rem;
 }
 
 ul li a:hover {
-  color: rgb(238, 108, 77);
+  color: var(--bg-primary);
 }
 
 .active {
-  color: rgb(238, 108, 77);
+  color: var(--bg-primary);
 }
 
 @media (max-width: 450px) {
@@ -52,7 +52,7 @@ ul li a:hover {
 
   ul li a {
     font-size: 1.2rem;
-    color: rgb(146, 145, 145);
+    color: var(--text-primary);
     text-decoration: none;
     margin-right: 1rem;
   }

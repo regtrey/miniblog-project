@@ -1,19 +1,19 @@
 .footer {
-  height: 4rem;
+  height: 6rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: rgb(238, 108, 77);
+  background-color: var(--bg-primary);
 }
 
 .copyright {
-  font-size: 1.1rem;
-  color: white;
+  font-size: 1rem;
+  color: var(--text-secondary);
+  text-align: center;
 }
 
 @media (max-width: 450px) {
   .copyright {
     font-size: 0.9rem;
-    text-align: center;
   }
 }

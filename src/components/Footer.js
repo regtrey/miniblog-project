@@ -5,7 +5,8 @@ const Footer = () => {
   return (
     <footer className={classes.footer}>
       <p className={classes.copyright}>
-        miniblog &copy; 2022 by Reggie Manigos. All rights reserved.
+        Miniblog &copy; 2022 by Reggie Manigos.
+        <br /> All rights reserved.
       </p>
     </footer>
   );

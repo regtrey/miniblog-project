@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import classes from './HomeScreen.module.css';
 import axios from 'axios';
+import Meta from '../utils/Meta';
 
 const HomeScreen = () => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [contentType, setContentType] = useState('Personal');
-  const [alert, setAlert] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [fail, setFail] = useState(false);
   const [buttonAlert, setButtonAlert] = useState(false);
 
   const submitHandler = async (e) => {
@@ -21,7 +23,7 @@ const HomeScreen = () => {
 
       setButtonAlert(true);
       window.setTimeout(() => {
-        setAlert(true);
+        setSuccess(true);
         setButtonAlert(false);
         setTitle('');
         setContent('');
@@ -29,57 +31,70 @@ const HomeScreen = () => {
       }, 1500);
 
       window.setTimeout(() => {
-        return setAlert(false);
+        return setSuccess(false);
       }, 3000);
     } catch (err) {
-      console.log(err);
+      setFail(true);
+
+      window.setTimeout(() => {
+        return setFail(false);
+      }, 3000);
     }
   };
 
   return (
-    <div className={classes.homeContainer}>
-      {alert && (
-        <div className={classes.alert}>
-          <p>Blog successfully posted!</p>
+    <>
+      <Meta />
+      <div className={classes.homeContainer}>
+        {success ? (
+          <div className={classes.successAlert}>
+            <p>Blog successfully posted!</p>
+          </div>
+        ) : fail ? (
+          <div className={classes.failAlert}>
+            <p>Blog posting failed!</p>
+          </div>
+        ) : (
+          ''
+        )}
+
+        <h1 className={classes.mobileCreate}>create</h1>
+        <h1 className={classes.create}>create</h1>
+        <h1 className={classes.create2}>create</h1>
+        <h1 className={classes.create3}>create</h1>
+        <div className={classes.formContainer}>
+          <form onSubmit={submitHandler}>
+            <label>Title</label>
+            <input
+              type="text"
+              value={title}
+              placeholder="Enter Title"
+              maxLength="50"
+              onChange={(e) => setTitle(e.target.value)}
+            ></input>
+
+            <label>Content</label>
+            <textarea
+              value={content}
+              placeholder="Enter Text"
+              maxLength="340"
+              onChange={(e) => setContent(e.target.value)}
+            ></textarea>
+
+            <label>Type</label>
+            <select
+              value={contentType}
+              onChange={(e) => setContentType(e.target.value)}
+            >
+              <option value="Personal">Personal</option>
+              <option value="Work">Work</option>
+            </select>
+
+            <button type="submit">{buttonAlert ? 'Posting...' : 'Post'}</button>
+          </form>
         </div>
-      )}
-
-      <h1 className={classes.mobileCreate}>create</h1>
-      <h1 className={classes.create}>create</h1>
-      <h1 className={classes.create2}>create</h1>
-      <h1 className={classes.create3}>create</h1>
-      <div className={classes.formContainer}>
-        <form onSubmit={submitHandler}>
-          <label>Title</label>
-          <input
-            type="text"
-            value={title}
-            placeholder="Enter Title"
-            maxLength="50"
-            onChange={(e) => setTitle(e.target.value)}
-          ></input>
-
-          <label>Content</label>
-          <textarea
-            value={content}
-            placeholder="Enter Text"
-            maxLength="340"
-            onChange={(e) => setContent(e.target.value)}
-          ></textarea>
-
-          <label>Type</label>
-          <select
-            value={contentType}
-            onChange={(e) => setContentType(e.target.value)}
-          >
-            <option value="Personal">Personal</option>
-            <option value="Work">Work</option>
-          </select>
-
-          <button type="submit">{buttonAlert ? 'Posting...' : 'Post'}</button>
-        </form>
       </div>
-    </div>
+    </>
   );
 };
 

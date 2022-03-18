@@ -18,7 +18,7 @@ const Header = () => {
 
   return (
     <header className={classes.header}>
-      <NavLink to="/" className={classes.logo}>
+      <NavLink to="/" className={classes.logo} onClick={homeHandler}>
         miniblog
       </NavLink>
 
