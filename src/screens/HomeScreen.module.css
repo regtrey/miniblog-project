@@ -153,25 +153,25 @@ button:hover {
 }
 
 @media (max-width: 450px) {
-  .alert {
+  .successAlert {
     height: 2.5rem;
     width: 20rem;
     margin: 0 1.75rem;
   }
 
-  .alert p {
+  .successAlert p {
     font-size: 1rem;
     color: var(--text-secondary);
     text-align: center;
   }
 
-  .errorAlert {
+  .failAlert {
     height: 2.5rem;
     width: 20rem;
     margin: 0 1.75rem;
   }
 
-  .errorAlert p {
+  .failAlert p {
     font-size: 1rem;
     color: var(--text-secondary);
     text-align: center;
