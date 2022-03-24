@@ -13,5 +13,5 @@ jobs:
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_MINIBLOG_PROJECT }}'
-          projectId: miniblog-project
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_MINIBLOG_PROJECT_C391B }}'
+          projectId: miniblog-project-c391b
