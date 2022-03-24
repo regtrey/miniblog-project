@@ -1,43 +1,30 @@
 import React, { useState, useEffect } from 'react';
 import classes from './BlogsScreen.module.css';
-import axios from 'axios';
 import Meta from '../utils/Meta';
+import { db } from '../firebase-config';
+import { collection, getDocs, deleteDoc, doc } from 'firebase/firestore';
 
 const PostsScreen = () => {
   const [blogs, setBlogs] = useState([]);
 
+  const blogsCollectionRef = collection(db, 'blogs');
+
   useEffect(() => {
     async function fetchData() {
       try {
-        const { data } = await axios.get(
-          'https://miniblog-project-default-rtdb.asia-southeast1.firebasedatabase.app/.json'
-        );
-
-        const contents = [];
-
-        if (data) {
-          const keys = Object.keys(data);
-
-          keys.map((key) => {
-            return contents.push({
-              id: key,
-              title: data[key].title,
-              content: data[key].content,
-              type: data[key].contentType,
-            });
-          });
-          setBlogs(contents);
-        }
+        const data = await getDocs(blogsCollectionRef);
+        setBlogs(data.docs.map((doc) => ({ id: doc.id, ...doc.data() })));
       } catch (err) {
         console.log(err);
       }
     }
-
     fetchData();
-  }, []);
+  }, [blogsCollectionRef]);
 
-  const deleteHandler = (id) => {
+  const deleteHandler = async (id) => {
     setBlogs(blogs.filter((blog) => blog.id !== id));
+    const blogDoc = doc(db, 'blogs', id);
+    await deleteDoc(blogDoc);
   };
 
   return (
@@ -66,12 +53,12 @@ const PostsScreen = () => {
                   <div className={classes.typeContainer}>
                     <h2
                       className={
-                        blog.type === 'Personal'
+                        blog.contentType === 'Personal'
                           ? [classes.type, classes.personal].join(' ')
                           : [classes.type, classes.work].join(' ')
                       }
                     >
-                      {blog.type}
+                      {blog.contentType}
                     </h2>
                   </div>
                   <h2 className={classes.blogTitle}>{blog.title}</h2>

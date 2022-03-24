@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import classes from './HomeScreen.module.css';
-import axios from 'axios';
 import Meta from '../utils/Meta';
+import { db } from '../firebase-config';
+import { collection, addDoc } from 'firebase/firestore';
 
 const HomeScreen = () => {
   const [title, setTitle] = useState('');
@@ -11,15 +12,17 @@ const HomeScreen = () => {
   const [fail, setFail] = useState(false);
   const [buttonAlert, setButtonAlert] = useState(false);
 
+  const blogsCollectionRef = collection(db, 'blogs');
+
   const submitHandler = async (e) => {
     e.preventDefault();
 
     try {
-      const data = { title, content, contentType };
-      await axios.post(
-        'https://miniblog-project-default-rtdb.asia-southeast1.firebasedatabase.app/.json',
-        data
-      );
+      await addDoc(blogsCollectionRef, {
+        title,
+        content,
+        contentType,
+      });
 
       setButtonAlert(true);
       window.setTimeout(() => {
@@ -28,11 +31,11 @@ const HomeScreen = () => {
         setTitle('');
         setContent('');
         setContentType('Personal');
-      }, 1500);
+      }, 2500);
 
       window.setTimeout(() => {
         return setSuccess(false);
-      }, 3000);
+      }, 3500);
     } catch (err) {
       setFail(true);
 
